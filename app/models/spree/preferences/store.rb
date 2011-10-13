@@ -21,9 +21,9 @@ module Spree::Preferences
     end
 
     def get(key, default_key=nil)
-      unconvert @cache.fetch(key) do
-        @cache.read(default_key) if default_key
-      end
+      value = @cache.read(key)
+      value = @cache.read(default_key) unless value
+      unconvert value
     end
 
     private

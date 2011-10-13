@@ -50,11 +50,7 @@ module Spree::Preferences::Preferable
 
   def preference_cache_key(name, scope_id=nil)
     scope_id = scope_id || try(:id) || :new
-
-    key = [self.class.name]
-    key << scope_id
-    key << name
-    key.join('::').underscore
+    [self.class.name, scope_id, name].join('::').underscore
   end
 
   delegate :preference_default_cache_key, :preference_store, :to => 'self.class'
